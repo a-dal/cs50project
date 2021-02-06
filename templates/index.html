@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    project title
+{% endblock %}
+
+{% block body %}
+    <form action="/" method="post">
+    {% for i in range (1,8) %}
+        {% for j in ["a", "b", "c"] %}
+            {% if i == 6  and j != "c" %}
+                <select name="noseat">
+                    <option disabled>noseat</option>
+                </select>
+                {% continue %}
+            {% endif %}
+                <select name="Seat {{i}}{{j}}" id="seat{{i}} {{j}}">
+                    <option value="0" style="background-color:white" selected="selected">Empty</option>
+                    <option value="86" style="background-color:orange">Male</option>
+                    <option value="68" style="background-color:green">Female</option>
+                    <option value="35" style="background-color:yellow">Child</option>
+                </select>
+        {% endfor %}
+        <br>
+    {% endfor %}
+        <button class="btn btn-primary" type="submit">Calculate</button>
+    </form>
+    <p>Takeoff Mass is {{actualmass}} and the index is {{ index|round(2) }}</p>
+{% endblock %}
