@@ -1,29 +1,49 @@
 {% extends "layout.html" %}
-
-{% block title %}
-    project title
-{% endblock %}
-
-{% block body %}
+{% block main %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">{% block title %}Calculator{% endblock %}</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group me-2">
+      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+    </div>
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+      <span data-feather="calendar"></span>
+      This week
+    </button>
+  </div>
+</div>
+<div class="">
     <form action="/" method="post">
-    {% for i in range (1,8) %}
-        {% for j in ["a", "b", "c"] %}
+      {% for i in range (1,8) %}
+        <div class="row g-3">
+          {% for j in ["a", "b", "c"] %}
             {% if i == 6  and j != "c" %}
-                <select name="noseat">
+              <div class="col-md-4">
+                <select class="form-select" disabled>
                     <option disabled>noseat</option>
                 </select>
-                {% continue %}
+              </div>
+              {% continue %}
             {% endif %}
-                <select name="Seat {{i}}{{j}}" id="seat{{i}} {{j}}">
-                    <option value="0" style="background-color:white" selected="selected">Empty</option>
-                    <option value="86" style="background-color:orange">Male</option>
-                    <option value="68" style="background-color:green">Female</option>
-                    <option value="35" style="background-color:yellow">Child</option>
-                </select>
-        {% endfor %}
-        <br>
-    {% endfor %}
-        <button class="btn btn-primary" type="submit">Calculate</button>
+            <div class="col-md-4">
+            <select class="form-select" name="Seat {{i}}{{j}}" id="seat{{i}} {{j}}">
+              <option value="0" style="background-color:white" selected="selected">Empty</option>
+              <option value="86" style="background-color:orange">Male</option>
+              <option value="68" style="background-color:green">Female</option>
+              <option value="35" style="background-color:yellow">Child</option>
+            </select>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <button class="btn btn-primary" type="submit">Calculate</button>
     </form>
-    <p>Takeoff Mass is {{actualmass}} and the index is {{ index|round(2) }}</p>
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Result</h4>
+      <hr>
+      <p>Takeoff Mass is {{actualmass}} and the index is {{ index|round(2) }}</p>
+    </div>
+  </div>
+
 {% endblock %}
