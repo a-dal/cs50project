@@ -1,3 +1,6 @@
+/*
+ * Sidebar
+ */
 body {
   font-size: .875rem;
 }
@@ -7,6 +10,10 @@ body {
   height: 16px;
   vertical-align: text-bottom;
 }
+.row{
+  margin-bottom: 20px;
+}
+
 
 /*
  * Sidebar

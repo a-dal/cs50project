@@ -26,18 +26,17 @@ arms = [0, 135, 165, 195, 225, 254, 281, 320]
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if request.method == "POST":
-        actualmass = dom
-        index = doi
-        for i in range (1,8):
-            for j in ["a", "b", "c"]:
-                if i == 6  and j != "c":
-                    continue
-                seatweight = int(request.form.get("Seat "+ str(i) + j))
-                actualmass += seatweight
-                if seatweight > 0:
-                    index += seatweight * (arms[i] - 210)/4536
-
-        return render_template("index.html", actualmass=actualmass, index=index)
-    else:
-        return render_template("index.html", actualmass=dom, index=doi)
+  if request.method == "POST":
+    actualmass = dom
+    index = doi
+    for i in range (1,8):
+      for j in ["a", "b", "c"]:
+        form_seat_val = request.form.get("seat-"+ str(i) +"-"+ j)
+        if form_seat_val:
+          seatweight = int( form_seat_val )
+          if seatweight > 0:
+            actualmass += seatweight
+            index += seatweight * (arms[i] - 210)/4536
+    return render_template("index.html", actualmass=actualmass, index=index)
+  else:
+    return render_template("index.html", actualmass=dom, index=doi)

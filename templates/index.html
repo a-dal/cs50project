@@ -14,36 +14,34 @@
   </div>
 </div>
 <div class="">
-    <form action="/" method="post">
-      {% for i in range (1,8) %}
-        <div class="row g-3">
-          {% for j in ["a", "b", "c"] %}
-            {% if i == 6  and j != "c" %}
-              <div class="col-md-4">
-                <select class="form-select" disabled>
-                    <option disabled>noseat</option>
-                </select>
-              </div>
-              {% continue %}
-            {% endif %}
-            <div class="col-md-4">
-            <select class="form-select" name="Seat {{i}}{{j}}" id="seat{{i}} {{j}}">
-              <option value="0" style="background-color:white" selected="selected">Empty</option>
-              <option value="86" style="background-color:orange">Male</option>
-              <option value="68" style="background-color:green">Female</option>
-              <option value="35" style="background-color:yellow">Child</option>
-            </select>
-            </div>
-          {% endfor %}
-        </div>
-      {% endfor %}
-      <button class="btn btn-primary" type="submit">Calculate</button>
-    </form>
-    <div class="alert alert-success" role="alert">
-      <h4 class="alert-heading">Result</h4>
-      <hr>
-      <p>Takeoff Mass is {{actualmass}} and the index is {{ index|round(2) }}</p>
-    </div>
+  <form action="/" method="post">
+    {% for i in range (1,8) %}
+      <div class="row g-3">
+        {% for j in ["a", "b", "c"] %}
+          <div class="col-md-4">
+          <select class="form-select" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}"{% if i == 6  and j != "c" %} disabled{% endif %}>
+            <option value="0" style="background-color:white" selected="selected">
+              {% if i == 6  and j != "c" %}
+                No seat
+              {% else %}
+                Empty
+              {% endif %}
+            </option>
+            <option value="86" style="background-color:orange">Male</option>
+            <option value="68" style="background-color:green">Female</option>
+            <option value="35" style="background-color:yellow">Child</option>
+          </select>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+    <button class="btn btn-primary" type="submit">Calculate</button>
+  </form>
+  <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Result</h4>
+    <hr>
+    <p>Takeoff Mass is {{actualmass}} and the index is {{ index|round(2) }}</p>
   </div>
+</div>
 
 {% endblock %}
