@@ -19,7 +19,7 @@
       <div class="row g-3">
         {% for j in ["a", "b", "c"] %}
           <div class="col-md-4">
-          <select class="form-select" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}"{% if i == 6  and j != "c" %} disabled{% endif %}>
+          <select class="form-select" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}"{% if i == 6  and j != "c" %} style="visibility: hidden;" {% endif %}>
             <option value="0" style="background-color:white" selected="selected">
               {% if i == 6  and j != "c" %}
                 No seat
