@@ -21,20 +21,27 @@ def after_request(response):
 
 dom = 3683
 doi = 6.45
-arms = [0, 135, 165, 195, 225, 254, 281, 320]
+arms = {'nose': 25, '1': 135, '2': 165, '3': 195,
+        '4': 225, '5': 254, '6': 281, '7': 320}
+
+
+def get_index(weight, arm):
+    index_mod = weight * (arm - 210) / 4536
+    return index_mod
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        actualmass = dom
+        actmass = dom
         index = doi
-        actualmass += request.form.get("nose-hold")
+        actmass += int(request.form.get("nose-hold"))
+        index += get_index(int(request.form.get("nose-hold")), arms['nose'])
         for i in range(1, 8):
-            for j in ["a", "b", "c"]:
-                seatweight = request.form.get("seat-" + str(i) + "-" + j)
-                actualmass += seatweight
-                index += seatweight * (arms[i] - 210) / 4536
-        return render_template("index.html", actualmass=actualmass, index=index)
+            for j in ["A", "B", "C"]:
+                seatweight = int(request.form.get("seat-" + str(i) + "-" + j))
+                actmass += seatweight
+                index += get_index(seatweight, arms[str(i)])
+        return render_template("index.html", actualmass=actmass, index=index)
     else:
         return render_template("index.html", actualmass=dom, index=doi)
