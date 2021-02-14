@@ -21,8 +21,8 @@ def after_request(response):
 
 dom = 3683
 doi = 6.45
-arms = {'nose': 25, '1': 135, '2': 165, '3': 195,
-        '4': 225, '5': 254, '6': 281, '7': 320}
+arms = {'nose-hold': 25, '1': 135, '2': 165, 'FWD-tank': 191, '3': 195,
+        'AFT-tank': 210, '4': 225, '5': 254, '6': 281, '7': 320, 'tail-hold': 354}
 
 
 def get_index(weight, arm):
@@ -35,8 +35,15 @@ def index():
     if request.method == "POST":
         actmass = dom
         index = doi
-        actmass += int(request.form.get("nose-hold"))
-        index += get_index(int(request.form.get("nose-hold")), arms['nose'])
+        weights = {}
+        items = ["nose-hold", "tail-hold", "FWD-tank", "AFT-tank"]
+        for item in items:
+            if "tank" in item:
+                weights[item] = int(request.form.get(item)) / 2.2
+            else:
+                weights[item] = int(request.form.get(item))
+            actmass += weights[item]
+            index += get_index(weights[item], arms[item])
         for i in range(1, 8):
             for j in ["A", "B", "C"]:
                 seatweight = int(request.form.get("seat-" + str(i) + "-" + j))

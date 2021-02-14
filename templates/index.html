@@ -17,13 +17,13 @@
   <form action="/" method="post">
     <div class="col-md-4">
       <label for="FWD-tank">FWD Tank</label>
-      <input class="form-control" id="FWD-tank" placeholder="Lbs" type="number" min="0" max="1250">
+      <input class="form-control" name="FWD-tank" id="FWD-tank" placeholder="Lbs" type="number" min="0" max="1250" value="0">
       <label for="AFT-tank">AFT Tank</label>
-      <input class="form-control" id="AFT-tank" placeholder="Lbs" type="number" min="0" max="1250">
+      <input class="form-control" name="AFT-tank" id="AFT-tank" placeholder="Lbs" type="number" min="0" max="1250" value="0">
     </div>
     <div class="row g-3">
       <label for="nose-hold">Nose compartment</label>
-      <input class="form-control" name="nose-hold" id="nose-hold" placeholder="Kg" type="number" min="0" max="136" required>
+      <input class="form-control" name="nose-hold" id="nose-hold" placeholder="Kg" type="number" min="0" max="136" value="0">
     </div>
     {% for i in range (1,8) %}
       <div class="row g-3">
@@ -46,14 +46,14 @@
     {% endfor %}
     <div class="row g-3">
       <label for="tail-hold">Tail compartment</label>
-      <input class="form-control" id="tail-hold" placeholder="Kg" type="number" min="0" max="227">
+      <input class="form-control" name="tail-hold" id="tail-hold" placeholder="Kg" type="number" min="0" max="227" value="0">
     </div>
     <button class="btn btn-primary" type="submit">Calculate</button>
   </form>
   <div class="alert alert-success" role="alert">
     <h4 class="alert-heading">Result</h4>
     <hr>
-    <p>Takeoff Mass is {{actualmass}} and the index is {{ index|round(2) }}</p>
+    <p>Takeoff Mass is {{actualmass|round(1)}} and the index is {{ index|round(2) }}</p>
   </div>
 </div>
 
