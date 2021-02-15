@@ -53,7 +53,7 @@ def index():
             index += get_index(weights[item], arms[item])
         for i in range(1, 8):
             for j in ["A", "B", "C"]:
-                seatweight = int(request.form["seat-" + str(i) + "-" + j])
+                seatweight = int(request.form.get("seat-" + str(i) + "-" + j))
                 actmass += seatweight
                 index += get_index(seatweight, arms[str(i)])
         if actmass > 5760:
