@@ -25,8 +25,11 @@ def after_request(response):
 
 dom = 3683
 doi = 6.45
-arms = {'nose-hold': 25, '1': 135, '2': 165, 'FWD-tank': 191, '3': 195,
-        'AFT-tank': 210, '4': 225, '5': 254, '6': 281, '7': 320, 'tail-hold': 354}
+arms = {
+    'nose-hold': 25, '1': 135, '2': 165, 'FWD-tank': 191,
+    '3': 195, 'AFT-tank': 210, '4': 225, '5': 254,
+    '6': 281, '7': 320, 'tail-hold': 354
+}
 
 
 def get_index(weight, arm):
@@ -50,15 +53,15 @@ def index():
             index += get_index(weights[item], arms[item])
         for i in range(1, 8):
             for j in ["A", "B", "C"]:
-                seatweight = int(request.form.get("seat-" + str(i) + "-" + j))
+                seatweight = int(request.form["seat-" + str(i) + "-" + j])
                 actmass += seatweight
                 index += get_index(seatweight, arms[str(i)])
         if actmass > 5760:
-            flash("Takeoff mass is " + str(round(actmass)) +
-                  " and the index is " + str(round(index, 2)), "danger")
+            flash("Takeoff mass is " + str(round(actmass)) + " and\
+             the index is " + str(round(index, 2)), "danger")
         else:
-            flash("Takeoff mass is " + str(round(actmass)) +
-                  " and the index is " + str(round(index, 2)), "success")
+            flash("Takeoff mass is " + str(round(actmass)) + " and\
+             the index is " + str(round(index, 2)), "success")
 
         return redirect("/")
     else:

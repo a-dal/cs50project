@@ -57,6 +57,32 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
+  </script>
+  <script type="text/javascript">
+
+    function changeValue(button)
+    {
+        switch(button.value)
+        {
+            case "0":
+                button.value = "86";
+                button.style = "background-color:orange";
+                break;
+            case "86":
+                button.value = "68";
+                button.style = "background-color:green";
+                break;
+            case "68":
+                button.value = "35";
+                button.style = "background-color:yellow";
+                break;
+            case "35":
+                button.value = "0";
+                button.style = "background-color:white";
+        }
+    }
+
+  </script>
   </body>
 </html>
 

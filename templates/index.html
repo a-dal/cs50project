@@ -46,12 +46,7 @@
             {% elif j == "C" %}
               <label for="seat-{{i}}-{{j}}">{{i}}{{j}}</label>
             {% endif %}
-          <select class="form-select" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}"{% if i == 6  and j != "C" %} style="visibility: hidden;" {% endif %}>
-            <option value="0" style="background-color:white" selected="selected">Empty</option>
-            <option value="86" style="background-color:orange">Male</option>
-            <option value="68" style="background-color:green">Female</option>
-            <option value="35" style="background-color:yellow">Child</option>
-          </select>
+            <button type="button" class="form-control" onclick="changeValue(this)" value="0" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}" {% if i == 6  and j != "C" %} style="visibility: hidden;" {% endif %}>Pax</button>
           </div>
         {% endfor %}
       </div>
