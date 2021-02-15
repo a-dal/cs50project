@@ -4,7 +4,6 @@ import secrets
 secret = secrets.token_urlsafe(32)
 
 
-
 # Configure application
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
@@ -35,22 +34,11 @@ def get_index(weight, arm):
     return index_mod
 
 
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         actmass = dom
         index = doi
-<<<<<<< HEAD
-        for i in range(1, 8):
-            for j in ["a", "b", "c"]:
-                seatweight = int(request.form.get("seat-" + str(i) + "-" + j))
-                actmass += seatweight
-                index += seatweight * (arms[i] - 210) / 4536
-        return render_template("index.html", actualmass=actmass, index=index)
-    else:
-        return render_template("index.html", actualmass=dom, index=doi)
-=======
         weights = {}
         items = ["nose-hold", "tail-hold", "FWD-tank", "AFT-tank"]
         for item in items:
@@ -66,11 +54,12 @@ def index():
                 actmass += seatweight
                 index += get_index(seatweight, arms[str(i)])
         if actmass > 5760:
-            flash("Takeoff mass is " + str(round(actmass)) + " and the index is " + str(round(index, 2)), "danger")
+            flash("Takeoff mass is " + str(round(actmass)) +
+                  " and the index is " + str(round(index, 2)), "danger")
         else:
-            flash("Takeoff mass is " + str(round(actmass)) + " and the index is " + str(round(index, 2)), "success")
+            flash("Takeoff mass is " + str(round(actmass)) +
+                  " and the index is " + str(round(index, 2)), "success")
 
         return redirect("/")
     else:
         return render_template("index.html")
->>>>>>> cargo
