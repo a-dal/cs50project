@@ -14,11 +14,34 @@
   </div>
 </div>
 <div class="">
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+    <div class="alert alert-{{ category }}" role="alert">
+      <h4 class="alert-heading">Result</h4>
+      <hr>
+      {{ message }}
+    </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
   <form action="/" method="post">
+    <div class="col-md-4">
+      <label for="FWD-tank">FWD Tank</label>
+      <input class="form-control" name="FWD-tank" id="FWD-tank" placeholder="Lbs" type="number" min="0" max="1250" value="0">
+      <label for="AFT-tank">AFT Tank</label>
+      <input class="form-control" name="AFT-tank" id="AFT-tank" placeholder="Lbs" type="number" min="0" max="1250" value="0">
+    </div>
+    <div class="row g-3">
+      <label for="nose-hold">Nose compartment</label>
+      <input class="form-control" name="nose-hold" id="nose-hold" placeholder="Kg" type="number" min="0" max="136" value="0">
+    </div>
     {% for i in range (1,8) %}
       <div class="row g-3">
-        {% for j in ["a", "b", "c"] %}
+        {% for j in ["A", "B", "C"] %}
           <div class="col-md-4">
+<<<<<<< HEAD
           <select class="form-select" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}"{% if i == 6  and j != "c" %} style="visibility: hidden;" {% endif %}>
             <option value="0" style="background-color:white" selected="selected">
               {% if i == 6  and j != "c" %}
@@ -27,6 +50,15 @@
                 Empty
               {% endif %}
             </option>
+=======
+            {% if i != 6 %}
+              <label for="seat-{{i}}-{{j}}">{{i}}{{j}}</label>
+            {% elif j == "C" %}
+              <label for="seat-{{i}}-{{j}}">{{i}}{{j}}</label>
+            {% endif %}
+          <select class="form-select" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}"{% if i == 6  and j != "C" %} style="visibility: hidden;" {% endif %}>
+            <option value="0" style="background-color:white" selected="selected">Empty</option>
+>>>>>>> cargo
             <option value="86" style="background-color:orange">Male</option>
             <option value="68" style="background-color:green">Female</option>
             <option value="35" style="background-color:yellow">Child</option>
@@ -35,13 +67,12 @@
         {% endfor %}
       </div>
     {% endfor %}
+    <div class="row g-3">
+      <label for="tail-hold">Tail compartment</label>
+      <input class="form-control" name="tail-hold" id="tail-hold" placeholder="Kg" type="number" min="0" max="227" value="0">
+    </div>
     <button class="btn btn-primary" type="submit">Calculate</button>
   </form>
-  <div class="alert alert-success" role="alert">
-    <h4 class="alert-heading">Result</h4>
-    <hr>
-    <p>Takeoff Mass is {{actualmass}} and the index is {{ index|round(2) }}</p>
-  </div>
 </div>
 
 {% endblock %}

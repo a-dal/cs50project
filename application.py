@@ -1,10 +1,15 @@
 from flask import Flask, flash, redirect, render_template, request
+import secrets
+
+secret = secrets.token_urlsafe(32)
+
 
 
 # Configure application
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 app.config.from_object(__name__)
+app.secret_key = secret
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -21,7 +26,14 @@ def after_request(response):
 
 dom = 3683
 doi = 6.45
-arms = [0, 135, 165, 195, 225, 254, 281, 320]
+arms = {'nose-hold': 25, '1': 135, '2': 165, 'FWD-tank': 191, '3': 195,
+        'AFT-tank': 210, '4': 225, '5': 254, '6': 281, '7': 320, 'tail-hold': 354}
+
+
+def get_index(weight, arm):
+    index_mod = weight * (arm - 210) / 4536
+    return index_mod
+
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -29,6 +41,7 @@ def index():
     if request.method == "POST":
         actmass = dom
         index = doi
+<<<<<<< HEAD
         for i in range(1, 8):
             for j in ["a", "b", "c"]:
                 seatweight = int(request.form.get("seat-" + str(i) + "-" + j))
@@ -37,3 +50,27 @@ def index():
         return render_template("index.html", actualmass=actmass, index=index)
     else:
         return render_template("index.html", actualmass=dom, index=doi)
+=======
+        weights = {}
+        items = ["nose-hold", "tail-hold", "FWD-tank", "AFT-tank"]
+        for item in items:
+            if "tank" in item:
+                weights[item] = int(request.form.get(item)) / 2.2
+            else:
+                weights[item] = int(request.form.get(item))
+            actmass += weights[item]
+            index += get_index(weights[item], arms[item])
+        for i in range(1, 8):
+            for j in ["A", "B", "C"]:
+                seatweight = int(request.form.get("seat-" + str(i) + "-" + j))
+                actmass += seatweight
+                index += get_index(seatweight, arms[str(i)])
+        if actmass > 5760:
+            flash("Takeoff mass is " + str(round(actmass)) + " and the index is " + str(round(index, 2)), "danger")
+        else:
+            flash("Takeoff mass is " + str(round(actmass)) + " and the index is " + str(round(index, 2)), "success")
+
+        return redirect("/")
+    else:
+        return render_template("index.html")
+>>>>>>> cargo
