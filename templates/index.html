@@ -41,16 +41,6 @@
       <div class="row g-3">
         {% for j in ["A", "B", "C"] %}
           <div class="col-md-4">
-<<<<<<< HEAD
-          <select class="form-select" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}"{% if i == 6  and j != "c" %} style="visibility: hidden;" {% endif %}>
-            <option value="0" style="background-color:white" selected="selected">
-              {% if i == 6  and j != "c" %}
-                No seat
-              {% else %}
-                Empty
-              {% endif %}
-            </option>
-=======
             {% if i != 6 %}
               <label for="seat-{{i}}-{{j}}">{{i}}{{j}}</label>
             {% elif j == "C" %}
@@ -58,7 +48,6 @@
             {% endif %}
           <select class="form-select" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}"{% if i == 6  and j != "C" %} style="visibility: hidden;" {% endif %}>
             <option value="0" style="background-color:white" selected="selected">Empty</option>
->>>>>>> cargo
             <option value="86" style="background-color:orange">Male</option>
             <option value="68" style="background-color:green">Female</option>
             <option value="35" style="background-color:yellow">Child</option>
