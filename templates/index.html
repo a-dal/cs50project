@@ -29,7 +29,7 @@
   <form action="/" method="post">
     <div class="col-md-4">
       <label for="FWD-tank">FWD Tank</label>
-      <input class="form-control" name="FWD-tank" id="FWD-tank" placeholder="Lbs" type="number" min="0" max="1250" value="0">
+      <input class="form-control" name="FWD-tank" id="FWD-tank" placeholder="Lbs" type="number" min="0" max="1250" value="0" autofocus="true">
       <label for="AFT-tank">AFT Tank</label>
       <input class="form-control" name="AFT-tank" id="AFT-tank" placeholder="Lbs" type="number" min="0" max="1250" value="0">
     </div>
@@ -46,7 +46,7 @@
             {% elif j == "C" %}
               <label for="seat-{{i}}-{{j}}">{{i}}{{j}}</label>
             {% endif %}
-            <input type="button" class="form-control" onclick="changeValue(this)" value="0" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}" {% if i == 6  and j != "C" %} style="visibility: hidden;" {% endif %}>
+            <button type="button" class="form-control" onclick="changeValue(this)" value="0" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}" {% if i == 6  and j != "C" %} style="visibility: hidden;" {% endif %}>X</button>
           </div>
         {% endfor %}
       </div>

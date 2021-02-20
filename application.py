@@ -33,8 +33,7 @@ arms = {
 
 
 def get_index(weight, arm):
-    index_mod = weight * (arm - 210) / 4536
-    return index_mod
+    return weight * (arm - 210) / 4536
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -57,12 +56,11 @@ def index():
                 actmass += seatweight
                 index += get_index(seatweight, arms[str(i)])
         if actmass > 5760:
-            flash("Takeoff mass is " + str(round(actmass)) + " and\
-             the index is " + str(round(index, 2)), "danger")
+            category = "danger"
         else:
-            flash("Takeoff mass is " + str(round(actmass)) + " and\
-             the index is " + str(round(index, 2)), "success")
-
+            category = "success"
+        flash("Takeoff mass is " + str(round(actmass)) + " and\
+             the index is " + str(round(index, 2)), category)
         return redirect("/")
     else:
         return render_template("index.html")
