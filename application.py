@@ -54,11 +54,11 @@ def index():
                 actmass += seatweight
                 index += get_index(seatweight, arms[str(i)])
         if actmass > 5760:
-            flash("Takeoff mass is " + str(round(actmass)) +
-                  " and the index is " + str(round(index, 2)), "danger")
+            flash("Takeoff mass is " + str(round(actmass)) + " and\
+             the index is " + str(round(index, 2)), "danger")
         else:
-            flash("Takeoff mass is " + str(round(actmass)) +
-                  " and the index is " + str(round(index, 2)), "success")
+            flash("Takeoff mass is " + str(round(actmass)) + " and\
+             the index is " + str(round(index, 2)), "success")
 
         return redirect("/")
     else:
