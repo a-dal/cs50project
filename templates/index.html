@@ -46,7 +46,7 @@
             {% elif j == "C" %}
               <label for="seat-{{i}}-{{j}}">{{i}}{{j}}</label>
             {% endif %}
-            <button type="button" class="form-control" onclick="changeValue(this)" value="0" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}" {% if i == 6  and j != "C" %} style="visibility: hidden;" {% endif %}>X</button>
+            <button type="button" class="form-control" onclick="changeValue(this)" value="0" name="seat-{{i}}-{{j}}" id="seat-{{i}}-{{j}}" {% if i == 6  and j != "C" %} style="visibility: hidden;" {% endif %}>Empty</button>
           </div>
         {% endfor %}
       </div>
