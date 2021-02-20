@@ -13,9 +13,9 @@
 <body>
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">C.G. calculator</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <button[0] class="navbar-toggler position-absolute d-md-none collapsed" type="button[0]" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button[0]>
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
         <a class="nav-link" href="#">Sign in</a>
@@ -60,27 +60,27 @@
   </script>
   <script type="text/javascript">
 
-    function changeValue(button)
+    function changeValue(input, button)
     {
-        switch(button.value)
+        switch(input[0].value)
         {
             case "0":
-                button.value = "86";
+                input[0].value = "86";
                 button.style = "background-color:orange";
                 button.innerHTML = "Male"
                 break;
             case "86":
-                button.value = "68";
+                input[0].value = "68";
                 button.style = "background-color:green";
                 button.innerHTML = "Female"
                 break;
             case "68":
-                button.value = "35";
+                input[0].value = "35";
                 button.style = "background-color:yellow";
                 button.innerHTML = "Child"
                 break;
             case "35":
-                button.value = "0";
+                input[0].value = "0";
                 button.style = "background-color:white";
                 button.innerHTML = "Empty"
         }
