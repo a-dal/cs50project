@@ -55,7 +55,7 @@ def index():
                 seatweight = int(request.form.get("seat-" + str(i) + "-" + j))
                 actmass += seatweight
                 index += get_index(seatweight, arms[str(i)])
-        if actmass > 5760:
+        if not 3.6 < index < 16.7 or actmass > 5760:
             category = "danger"
         else:
             category = "success"
