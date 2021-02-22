@@ -37,6 +37,11 @@ body {
   .sidebar {
     top: 5rem;
   }
+
+  .pax {
+    width: 33%;
+  }
+
 }
 
 .sidebar-sticky {
