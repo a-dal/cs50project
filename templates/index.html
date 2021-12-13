@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block main %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">{% block title %}Calculator{% endblock %}</h1>
+  <h1 class="h2">{% block title %}DHC-6 C.G. Calculator{% endblock %}</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group me-2">
       <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -28,9 +28,9 @@
   {% endwith %}
   <form action="/" method="post">
     <div class="col-md-4">
-      <label for="FWD-tank">FWD Tank</label>
+      <label for="FWD-tank">FWD Fuel Tank</label>
       <input class="form-control" name="FWD-tank" id="FWD-tank" placeholder="Lbs" type="number" min="0" max="1250" value="0" autofocus="true">
-      <label for="AFT-tank">AFT Tank</label>
+      <label for="AFT-tank">AFT Fuel Tank</label>
       <input class="form-control" name="AFT-tank" id="AFT-tank" placeholder="Lbs" type="number" min="0" max="1250" value="0">
     </div>
     <div class="row g-3">
