@@ -19,7 +19,11 @@
     {% if messages %}
       {% for category, message in messages %}
     <div class="alert alert-{{ category }}" role="alert">
-      <h4 class="alert-heading">Result</h4>
+        {% if category == "info" %}
+        <h4 class="alert-heading">Info</h4>
+        {% else %}
+        <h4 class="alert-heading">Result</h4>
+        {% endif %}
       <hr>
       {{ message }}
     </div>

@@ -59,8 +59,14 @@ def index():
             category = "danger"
         else:
             category = "success"
-        flash("Takeoff mass is " + str(round(actmass)) + " and\
+        flash("Takeoff mass is " + str(round(actmass)) + "Kg and\
              the index is " + str(round(index, 2)), category)
         return redirect("/")
     else:
         return render_template("index.html")
+
+@app.route("/info", methods=["GET"])
+def index_info():
+    category = "info"
+    flash("Accepted index range is between 3.6 and 16.7", category)
+    return redirect("/")
