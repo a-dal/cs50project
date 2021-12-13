@@ -15,25 +15,26 @@
 </div>
 <div class="">
 
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, message in messages %}
-    <div class="alert alert-{{ category }}" role="alert">
-        {% if category == "info" %}
-        <h4 class="alert-heading">Info</h4>
-        {% else %}
-        <h4 class="alert-heading">Result</h4>
-        {% endif %}
-      <hr>
-      {{ message }}
-    </div>
-      {% endfor %}
+  
+  {% if message %}
+    
+  <div class="alert alert-{{ message['category'] }}" role="alert">
+    {% if message["category"] == "info" %}
+      <h4 class="alert-heading">Info</h4>
+    {% else %}
+      <h4 class="alert-heading">Result</h4>
     {% endif %}
-  {% endwith %}
+    <hr>
+    {{ message["text"] }}
+  </div>
+    
+  {% endif %}
+  
   <form action="/" method="post">
     <div class="col-md-4">
       <label for="FWD-tank">FWD Fuel Tank</label>
       <input class="form-control" name="FWD-tank" id="FWD-tank" placeholder="Lbs" type="number" min="0" max="1250" value="0" autofocus="true">
+      <br>
       <label for="AFT-tank">AFT Fuel Tank</label>
       <input class="form-control" name="AFT-tank" id="AFT-tank" placeholder="Lbs" type="number" min="0" max="1250" value="0">
     </div>
