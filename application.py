@@ -44,10 +44,11 @@ def index():
         weights = {}
         items = ["nose-hold", "tail-hold", "FWD-tank", "AFT-tank"]
         for item in items:
+            item_value = int(request.form.get(item) or '0')
             if "tank" in item:
-                weights[item] = int(request.form.get(item)) / 2.2
+                weights[item] = item_value / 2.2
             else:
-                weights[item] = int(request.form.get(item))
+                weights[item] = item_value
             actmass += weights[item]
             index += get_index(weights[item], arms[item])
         for i in range(1, 8):

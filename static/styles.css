@@ -124,3 +124,7 @@ button{
 label{
     text-align: center;
 }
+
+#top-calculate{
+  float: right;
+}
