@@ -35,44 +35,90 @@ arms = {
 def get_index(weight, arm):
     return weight * (arm - 210) / 4536
 
-
-@app.route("/", methods=["GET", "POST"])
-def index():
-    if request.method == "POST":
-        actmass = dom
-        index = doi
-        weights = {}
-        items = ["nose-hold", "tail-hold", "FWD-tank", "AFT-tank"]
-        for item in items:
-            item_value = int(request.form.get(item) or '0')
-            if "tank" in item:
-                weights[item] = item_value / 2.2
-            else:
-                weights[item] = item_value
-            actmass += weights[item]
-            index += get_index(weights[item], arms[item])
-        for i in range(1, 8):
-            for j in ["A", "B", "C"]:
-                seatweight = int(request.form.get("seat-" + str(i) + "-" + j))
-                actmass += seatweight
-                index += get_index(seatweight, arms[str(i)])
-        if not 3.6 < index < 16.7 or actmass > 5760:
-            category = "danger"
+def calculateCg_and_GenerateMessage(dom, doi):
+    #set parameters
+    actmass = dom
+    index = doi
+    weights = {}
+    items = ["nose-hold", "tail-hold", "FWD-tank", "AFT-tank"]
+    #calculate cg
+    for item in items:
+        item_value = int(request.form.get(item) or '0')
+        if "tank" in item:
+            weights[item] = item_value / 2.2
         else:
-            category = "success"
-        message = {
-            "text": "Takeoff mass is " + str(round(actmass)) + " Kg and\
-             the index is " + str(round(index, 2)),
-            "category": category
-        }
-        return render_template("index.html", message = message)
+            weights[item] = item_value
+        actmass += weights[item]
+        index += get_index(weights[item], arms[item])
+
+    for i in range(1, 8):
+        for j in ["A", "B", "C"]:
+            seatweight = int(request.form.get("seat-" + str(i) + "-" + j))
+            actmass += seatweight
+            index += get_index(seatweight, arms[str(i)])
+    #generate message
+    if not 3.6 < index < 16.7 or actmass > 5760:
+            category = "danger"
     else:
-        return render_template("index.html")
+        category = "success"
+
+    variables = {
+        "message": "Takeoff mass is " + str(round(actmass)) + " Kg and\
+            the index is " + str(round(index, 2)),
+        "category": category,
+        "aircraft": ""
+    }
+    return variables
+
+@app.route("/")
+def home():
+    return render_template("home.html")
+
+@app.route("/ghial", methods=["GET", "POST"])
+def ghial():
+    plate = 'for G-HIAL'
+    if request.method == "POST":
+        
+        variables = calculateCg_and_GenerateMessage(3686, 6.45)
+        variables['aircraft'] = '/ghial'
+        
+        return render_template("aircraft.html", variables = variables, plate = plate)
+    else:
+        variables = {'aircraft': '/ghial'}
+        return render_template("aircraft.html", variables = variables, plate = plate)
+
+@app.route("/gsgts", methods=["GET", "POST"])
+def gsgts():
+    plate = 'for G-SGTS'
+    if request.method == "POST":
+        
+        variables = calculateCg_and_GenerateMessage(3666, 6.89)
+        variables['aircraft'] = '/gsgts'
+        
+        return render_template("aircraft.html", variables = variables, plate = plate)
+    else:
+        variables = {'aircraft': '/gsgts'}
+        return render_template("aircraft.html", variables = variables, plate = plate)
+
+@app.route("/gbvvk", methods=["GET", "POST"])
+def gbvvk():
+    plate = 'for G-BVVK'
+    if request.method == "POST":
+        
+        variables = calculateCg_and_GenerateMessage(3576, 6.37)
+        variables['aircraft'] = '/gbvvk'
+        
+        return render_template("aircraft.html", variables = variables, plate = plate)
+    else:
+        variables = {'aircraft': '/gbvvk'}
+        return render_template("aircraft.html", variables = variables, plate = plate)
 
 @app.route("/info", methods=["GET"])
 def index_info():
-    message = {
-            "text": "Accepted index range is between 3.6 and 16.7",
-            "category": "info"
+    variables = {
+            "message": "Accepted index range is between 3.6 and 16.7",
+            "category": "info",
+            "aircraft": ""
         }
-    return render_template("index.html", message = message)
+    
+    return render_template("aircraft.html", variables = variables)

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block main %}
+<div class="fleet">
+    <div class="aircraft">
+        <a href='/ghial'>
+            <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='ghial.jpg')}}">
+        </a> 
+    </div>
+    <div class="aircraft">
+        <a href='/gbvvk'>
+            <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='gbvvk.jpg')}}">
+        </a>
+    </div>
+    <div class="aircraft">
+        <a  href='/gsgts'>
+            <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='gsgts.jpg')}}">
+        </a>
+    </div>
+</div>
+{% endblock %}

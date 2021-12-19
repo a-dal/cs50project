@@ -1,11 +1,12 @@
 {% extends "layout.html" %}
 {% block main %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">{% block title %}DHC-6 C.G. Calculator{% endblock %}</h1>
+  <h1 class="h2">{% block title %}DHC-6 C.G. Calculator  {% if plate %} {{ plate }} {% endif %}{% endblock %}</h1>
+  
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group me-2">
       <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+      <button type="button" onclick="showIndexRange()" class="btn btn-sm btn-outline-secondary">Index info</button>
     </div>
     <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
       <span data-feather="calendar"></span>
@@ -16,21 +17,22 @@
 <div class="">
 
   
-  {% if message %}
+  {% if variables["message"] %}
     
-  <div class="alert alert-{{ message['category'] }}" role="alert">
-    {% if message["category"] == "info" %}
+  <div class="alert alert-{{ variables['category'] }}" role="alert">
+    {% if variables["category"] == "info" %}
       <h4 class="alert-heading">Info</h4>
     {% else %}
       <h4 class="alert-heading">Result</h4>
     {% endif %}
     <hr>
-    {{ message["text"] }}
+    {{ variables["message"] }}
   </div>
     
   {% endif %}
-  
-  <form action="/" method="post" class= 'needs-validation' novalidate>
+
+  {% if plate %}
+  <form id="loadsheet" action='{{variables["aircraft"]}}' method="post" class= 'needs-validation' novalidate>
     <button class="btn btn-primary" id='top-calculate' type="submit">Calculate</button>
     <div class="col-md-4">
       <label for="FWD-tank">FWD Fuel Tank</label>
@@ -77,5 +79,5 @@
     <button class="btn btn-primary" type="submit">Calculate</button>
   </form>
 </div>
-
+{% endif %}
 {% endblock %}

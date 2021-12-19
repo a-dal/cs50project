@@ -33,6 +33,15 @@ body {
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 
+.aircraft{
+  float: left;
+  width: 30%;
+}
+
+#top-calculate{
+  float: right;
+}
+
 @media (max-width: 767.98px) {
   .sidebar {
     top: 5rem;
@@ -42,6 +51,19 @@ body {
     width: 33%;
   }
 
+  #signin{
+    display: none;
+  }
+
+  #top-calculate{
+    margin: 20px;
+  }
+
+  .aircraft{
+    display: block;
+    float: none;
+    width: 100%;
+  }
 }
 
 .sidebar-sticky {
@@ -125,6 +147,5 @@ label{
     text-align: center;
 }
 
-#top-calculate{
-  float: right;
-}
+
+
