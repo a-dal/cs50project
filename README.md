@@ -9,4 +9,4 @@
 #### a documents stating the mass distribution of each flight and the calculation of the center of gravity to make sure it is within limits.
 #### This project is using a flask framework of python. There is a main application.py where you can find all the logic of the web app. In the same
 #### directory you can find a folder called static where all media an css is found and another folder called templates where you can find all html.
-#### There is also a profile and a requirements.txt in order to be able to deploy the code in heroku
+#### There is also a procfile and a requirements.txt in order to be able to deploy the code in heroku
