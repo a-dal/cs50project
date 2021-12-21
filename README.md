@@ -1,5 +1,5 @@
 # CofG Calculator
-#### Video Demo: https://youtu.be/RPd2holDHS8
+#### Video Demo: https://youtu.be/0U0Owll9zGo
 #### Description: It is a web app that allows users to calculate the Center of Gravity and Actual take off mass of different DHC-6 400 and 300 series of a given fleet.
 #### The code is deployed in heroku using the following link: https://cofg-calculator.herokuapp.com/
 #### What is the Center of gravity? The center of gravity of an object is where we can consider all of the weight of the object to be concentrated. 
