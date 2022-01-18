@@ -37,8 +37,8 @@ def get_index(weight, arm):
 
 def calculateCg_and_GenerateMessage(dom, doi):
     #set parameters
-    actmass = dom
-    index = doi
+    actmass = int(dom)
+    index = float(doi)
     weights = {}
     items = ["nose-hold", "tail-hold", "FWD-tank", "AFT-tank"]
     #calculate cg
@@ -70,9 +70,58 @@ def calculateCg_and_GenerateMessage(dom, doi):
     }
     return variables
 
+def calculateMantaCg_and_GenerateMessage(dom, doi):
+    #set parameters
+    actmass = int(dom)
+    index = float(doi)
+    weights = {}
+    items = ["nose-hold", "tail-hold", "FWD-tank", "AFT-tank"]
+    #calculate cg
+    for item in items:
+        item_value = int(request.form.get(item) or '0')
+        weights[item] = item_value
+        actmass += weights[item]
+        index += get_index(weights[item]/2.2, arms[item])
+
+    for i in range(1, 6):
+        for j in ["A", "B", "C"]:
+            seatweight = int(request.form.get("seat-" + str(i) + "-" + j)) * 2.2
+            actmass += seatweight
+            index += get_index(seatweight/2.2, arms[str(i)])
+    baggage = int(request.form.get("baggage-area") or '0')
+    actmass += baggage
+    index += get_index(baggage/2.2, 300)
+    #generate message
+    if not 3.6 < index < 16.7 or actmass > 12500:
+            category = "danger"
+    else:
+        category = "success"
+
+    variables = {
+        "message": "Takeoff mass is " + str(round(actmass)) + " Lbs and\
+            the index is " + str(round(index, 2)),
+        "category": category,
+        "aircraft": ""
+    }
+    return variables
+
 @app.route("/")
 def home():
     return render_template("home.html")
+
+@app.route("/custom", methods=["GET", "POST"])
+def custom():
+    plate = 'manta custom'
+    if request.method == "POST":
+        aps = request.form.get("APS")
+        index = request.form.get("index")
+        variables = calculateMantaCg_and_GenerateMessage(aps, index)
+        variables['aircraft'] = '/custom'
+        
+        return render_template("manta.html", variables = variables, plate = plate)
+    else:
+        variables = {'aircraft': '/custom'}
+        return render_template("manta.html", variables = variables, plate = plate)
 
 @app.route("/ghial", methods=["GET", "POST"])
 def ghial():

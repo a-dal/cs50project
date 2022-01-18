@@ -144,8 +144,20 @@ button{
 }
 
 label{
-    text-align: center;
+  text-align: center;
 }
 
+#baggage-area{
+  margin-top: 15px;
+  float: right;
+}
 
+#FWD-tank, #AFT-tank{
+  width: 50%;
+  margin-top: 15px;
+}
+
+#cc-seat{
+  background-color:#1299e7;
+}
 

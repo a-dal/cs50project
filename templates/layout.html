@@ -51,6 +51,12 @@
                     G-BVVK (300 series)
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/custom">
+                    <span data-feather="file-text"></span>
+                    Manta custom (300 series)
+                  </a>
+                </li>
               </ul>
             </li>
           </ul>
@@ -84,6 +90,16 @@
     {
         switch(input[0].value)
         {
+            case "0.01":
+                input[0].value = "-65";
+                button.style = "background-color:white";
+                button.innerHTML = "Empty"
+                break;
+            case "-65":
+                input[0].value = "0.01";
+                button.style = "background-color:#1299e7";
+                button.innerHTML = "CC"
+                break;
             case "0":
                 input[0].value = "86";
                 button.style = "background-color:orange";
@@ -104,6 +120,7 @@
                 button.style = "background-color:white";
                 button.innerHTML = "Empty"
         }
+        console.log(input[0].value);
     }
 
     // Example starter JavaScript for disabling form submissions if there are invalid fields
