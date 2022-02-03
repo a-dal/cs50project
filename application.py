@@ -53,7 +53,7 @@ def calculateCg_and_GenerateMessage(dom, doi):
 
     for i in range(1, 8):
         for j in ["A", "B", "C"]:
-            seatweight = int(request.form.get("seat-" + str(i) + "-" + j))
+            seatweight = int(request.form.get("seat-" + str(i) + "-" + j)) / 2.2
             actmass += seatweight
             index += get_index(seatweight, arms[str(i)])
     #generate message
@@ -85,7 +85,7 @@ def calculateMantaCg_and_GenerateMessage(dom, doi):
 
     for i in range(1, 6):
         for j in ["A", "B", "C"]:
-            seatweight = int(request.form.get("seat-" + str(i) + "-" + j)) * 2.2
+            seatweight = int(request.form.get("seat-" + str(i) + "-" + j))
             actmass += seatweight
             index += get_index(seatweight/2.2, arms[str(i)])
     baggage = int(request.form.get("baggage-area") or '0')
